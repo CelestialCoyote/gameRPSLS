@@ -3,10 +3,10 @@
 
 class Player {
 
-    constructor(name, score, roundChoice) {
+    constructor(name) {
         this.name = name;
-        this.score = score;
-        this.roundChoice = roundChoice;
+        this.score = 0;
+        this.roundChoice = '';
         this.gameGestures = ['rock', 'paper', 'scissors', 'lizard', 'Spock'];
     }
 
@@ -18,9 +18,15 @@ class Player {
         this.name = name;
     }
 
-    chooseGesture(gestureChoice) {
-        let roundChoice = '';
+    displayScore() {
+        return console.log(`Player score: ${this.score}`);
+    }
 
+    setScore(score) {
+        this.score = score;
+    }
+
+    chooseGesture(gestureChoice) {
         switch (gestureChoice.toLowerCase()) {
             case 'rock':
                 break;
@@ -35,7 +41,8 @@ class Player {
             default:
                 console.log('That is not a valid choice. Please try again.');
         }
-        return roundChoice;
+        
+        this.roundChoice = gestureChoice;
     }
 }
 
