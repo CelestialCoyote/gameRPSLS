@@ -4,7 +4,8 @@
   "description": "Rock, Paper, Scissors, Lizard, Spock game project for devCodeCamp",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Paul Stearns",
   "license": "ISC",
