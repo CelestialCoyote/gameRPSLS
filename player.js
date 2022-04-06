@@ -1,6 +1,9 @@
 'use strict';
 
 
+const prompt = require('prompt-sync')();
+
+
 class Player {
 
     constructor(name) {
@@ -27,22 +30,33 @@ class Player {
     }
 
     chooseGesture(gestureChoice) {
-        switch (gestureChoice.toLowerCase()) {
-            case 'rock':
-                break;
-            case 'paper':
-                break;
-            case 'scissors':
-                break;
-            case 'lizard':
-                break;
-            case 'spock':
-                break;
-            default:
-                console.log('That is not a valid choice. Please try again.');
+        let isValid = false;
+        let userChoice = gestureChoice.toLowerCase();
+        this.roundChoice = '';
+
+        while(!isValid){
+            switch (userChoice) {
+                case 'rock':
+                    isValid = true;
+                    break;
+                case 'paper':
+                    isValid = true;
+                    break;
+                case 'scissors':
+                    isValid = true;
+                    break;
+                case 'lizard':
+                    isValid = true;
+                    break;
+                case 'spock':
+                    isValid = true;
+                    break;
+                default:
+                    console.log(`That is not a valid choice. Please try again.`);
+                    prompt('> ');
+            }
         }
-        
-        this.roundChoice = gestureChoice;
+        this.roundChoice = userChoice;
     }
 }
 
