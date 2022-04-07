@@ -14,3 +14,4 @@ const PlayerComputer = require('./playerComputer');
 let game = new Game();
 
 game.displayWelcome();
+game.displayRules();
