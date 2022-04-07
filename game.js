@@ -17,6 +17,7 @@ class Game {
     constructor() {
         this.playerOne;
         this.playerTwo;
+        this.numberOfPlayers = 0;
     }
 
     displayWelcome() {
@@ -58,28 +59,33 @@ class Game {
             log(chalk.cyan(`What is Player One's name?\n`));
             response = prompt(chalk.cyan('> '));
 
-            let playerOne = new PlayerHuman(response);
-            let playerTwo = new PlayerComputer();
+            this.playerOne = new PlayerHuman(response);
+            this.playerTwo = new PlayerComputer();
+            this.numberOfPlayers = 1;
 
-            playerOne.displayName('Player One');
-            playerTwo.displayName('Player Two');
+            this.playerOne.displayName('Player One');
+            this.playerTwo.displayName('Player Two');
+            log(chalk.magenta(`\nnumberOfPlayers set to: ${this.numberOfPlayers}\n`));
             log('');
         } else if(response === '2') {
             log(chalk.green(`\nOne human player vs. another human player.\n`));
             log(chalk.cyan(`What is Player One's name?\n`));
             response = prompt(chalk.cyan('> '));
 
-            let playerOne = new PlayerHuman(response);
+            this.playerOne = new PlayerHuman(response);
             log(`\n`);
 
             log(chalk.cyan(`What is Player Two's name?\n`));
             response = prompt(chalk.cyan('> '));
 
-            let playerTwo = new PlayerHuman(response);
+            this.playerTwo = new PlayerHuman(response);
             log(`\n`);
 
-            playerOne.displayName('Player One');
-            playerTwo.displayName('Player Two');
+            this.playerOne.displayName('Player One');
+            this.playerTwo.displayName('Player Two');
+            this.numberOfPlayers = 2;
+    
+            log(chalk.magenta(`\nnumberOfPlayers set to: ${this.numberOfPlayers}\n`));
             log('');
         } else {
             log(chalk.red(`\nThat is not a valid input.\nPlease enter '1' or '2'.\n`));
@@ -88,7 +94,25 @@ class Game {
     }
 
     playRound() {
+        log(chalk.cyan(`What is Player One's gesture?`));
+        let playerOneMove = prompt(chalk.yellow('>'));
 
+        this.playerOne.chooseGesture(playerOneMove);
+        log('');
+
+        if(this.numberOfPlayers === 2) {
+            log(chalk.cyan(`What is Player Two's gesture?`));
+            let playerTwoMove = prompt(chalk.yellow('>'));
+
+            this.playerTwo.chooseGesture(playerTwoMove);
+            log('');
+        } else {
+            this.playerTwo.chooseGesture();
+        }
+
+        log(this.playerOne.roundChoice);
+        log(this.playerTwo.roundChoice);
+        
     }
 
     checkRoundWinner() {
