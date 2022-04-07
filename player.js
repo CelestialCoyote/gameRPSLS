@@ -10,7 +10,7 @@ class Player {
         this.name = name;
         this.score = 0;
         this.roundChoice = '';
-        this.gameGestures = ['rock', 'paper', 'scissors', 'lizard', 'Spock'];
+        this.gameGestures = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
     }
 
     displayName(player) {
