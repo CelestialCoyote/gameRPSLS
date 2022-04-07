@@ -1,18 +1,16 @@
 'use strict';
 
 
+// NPM imports.
 const prompt = require('prompt-sync')();
+
+// Class and function imports.
+const Game = require('./game');
 const Player = require('./player');
 const PlayerHuman = require('./playerHuman');
 const PlayerComputer = require('./playerComputer');
 
 
-let playerOne = new PlayerHuman();
-let playerTwo = new PlayerComputer();
+let game = new Game();
 
-playerOne.displayName('playerOne');
-playerTwo.displayName('playerTwo');
-
-console.log(playerTwo.roundChoice);
-playerTwo.chooseGesture();
-console.log(playerTwo.roundChoice);
+game.displayWelcome();
