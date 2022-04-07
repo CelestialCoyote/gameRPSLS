@@ -18,7 +18,7 @@ class Player {
     }
 
     displayName(player) {
-        return log(chalk.cyan(`${player}'s name: ${this.name}`));
+        return log(chalk.cyan(`\n${player}'s name: ${this.name}`));
     }
 
     setName(name) {
