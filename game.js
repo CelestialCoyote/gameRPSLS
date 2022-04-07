@@ -109,20 +109,98 @@ class Game {
         } else {
             this.playerTwo.chooseGesture();
         }
-
-        log(this.playerOne.roundChoice);
-        log(this.playerTwo.roundChoice);
         
+        log(chalk.yellow(`\nPlayer One's gesture was: ${this.playerOne.roundChoice}\n`));
+        log(chalk.yellow(`Player Two's gesture was: ${this.playerTwo.roundChoice}\n`));
+        this.checkRoundWinner(this.playerOne.roundChoice, this.playerTwo.roundChoice);
     }
 
-    checkRoundWinner() {
+    checkRoundWinner(playerOneGesture, playerTwoGesture) {
+        if(playerOneGesture === playerTwoGesture) {
+            this.displayRoundWinnerMessage('draw', playerOneGesture, playerTwoGesture, '');
+        }
 
+        switch (playerOneGesture) {
+            case 'rock':
+                if(playerTwoGesture === 'scissors') {
+                    this.displayRoundWinnerMessage('playerOne', playerOneGesture, playerTwoGesture, 'cushes');
+                } else if(playerTwoGesture === 'lizard') {
+                    this.displayRoundWinnerMessage('playerOne', playerOneGesture, playerTwoGesture, 'cushes');
+                } else if(playerTwoGesture === 'paper') {
+                    this.displayRoundWinnerMessage('playerTwo', playerOneGesture, playerTwoGesture, 'ccvers');
+                } else if(playerTwoGesture === 'spock') {
+                    this.displayRoundWinnerMessage('playerTwo', playerOneGesture, playerTwoGesture, 'vaporizes');
+                }
+                break;
+            case 'paper':
+                if(playerTwoGesture === 'rock') {
+                    this.displayRoundWinnerMessage('playerOne', playerOneGesture, playerTwoGesture, 'covers');
+                } else if(playerTwoGesture === 'spock') {
+                    this.displayRoundWinnerMessage('playerOne', playerOneGesture, playerTwoGesture, 'disproves');
+                } else if(playerTwoGesture === 'scissors') {
+                    this.displayRoundWinnerMessage('playerTwo', playerOneGesture, playerTwoGesture, 'cuts');
+                } else if(playerTwoGesture === 'lizard') {
+                    this.displayRoundWinnerMessage('playerTwo', playerOneGesture, playerTwoGesture, 'eats');
+                }
+                break;
+            case 'scissors':
+                if(playerTwoGesture === 'paper') {
+                    this.displayRoundWinnerMessage('playerOne', playerOneGesture, playerTwoGesture, 'cuts');
+                } else if(playerTwoGesture === 'lizard') {
+                    this.displayRoundWinnerMessage('playerOne', playerOneGesture, playerTwoGesture, 'decapitates');
+                } else if(playerTwoGesture === 'rock') {
+                    this.displayRoundWinnerMessage('playerTwo', playerOneGesture, playerTwoGesture, 'crushes');
+                } else if(playerTwoGesture === 'spock') {
+                    this.displayRoundWinnerMessage('playerTwo', playerOneGesture, playerTwoGesture, 'smashes');
+                }
+                break;
+            case 'lizard':
+                if(playerTwoGesture === 'spock') {
+                    this.displayRoundWinnerMessage('playerOne', playerOneGesture, playerTwoGesture, 'poisons');
+                } else if(playerTwoGesture === 'paper') {
+                    this.displayRoundWinnerMessage('playerOne', playerOneGesture, playerTwoGesture, 'eats');
+                } else if(playerTwoGesture === 'rock') {
+                    this.displayRoundWinnerMessage('playerTwo', playerOneGesture, playerTwoGesture, 'crushes');
+                } else if(playerTwoGesture === 'scissors') {
+                    this.displayRoundWinnerMessage('playerTwo', playerOneGesture, playerTwoGesture, 'decapitates');
+                }
+                break;
+            case 'spock':
+                if(playerTwoGesture === 'scissors') {
+                    this.displayRoundWinnerMessage('playerOne', playerOneGesture, playerTwoGesture, 'smashes');
+                } else if(playerTwoGesture === 'rock') {
+                    this.displayRoundWinnerMessage('playerOne', playerOneGesture, playerTwoGesture, 'vaporizes');
+                } else if(playerTwoGesture === 'lizard') {
+                    this.displayRoundWinnerMessage('playerTwo', playerOneGesture, playerTwoGesture, 'poisons');
+                } else if(playerTwoGesture === 'paper') {
+                    this.displayRoundWinnerMessage('playerTwo', playerOneGesture, playerTwoGesture, 'disproves');
+                }
+                break;
+        }
     }
+
+    displayRoundWinnerMessage(winner, playerOneGesture, playerTwoGesture, verb) {
+        if(winner === 'playerOne') {
+            this.playerOne.score++;
+            log(chalk.green(`Player One wins round.\n`));
+            log(chalk.green(`${playerOneGesture}`) + ` ${verb} ` + chalk.red(`${playerTwoGesture}`));
+        } else if (winner === 'playerTwo') {
+            this.playerTwo.score++;
+            log(chalk.green(`Player Two wins round.\n`));
+            log(chalk.green(`${playerTwoGesture}`) + ` ${verb} ` + chalk.red(`${playerOneGesture}`));
+        } else if(winner === 'draw') {
+            log(chalk.cyan(`No winner this round. Both players chose `) + chalk.red(`${playerOneGesture}.\n`));
+            this.playRound();
+        }
+    }
+
+    
 
     runGame() {
         this.displayWelcome();
         this.displayRules();
         this.createPlayers();
+        this.playRound();
     }
 }
 
