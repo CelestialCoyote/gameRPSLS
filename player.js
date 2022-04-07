@@ -13,8 +13,8 @@ class Player {
         this.gameGestures = ['rock', 'paper', 'scissors', 'lizard', 'Spock'];
     }
 
-    displayName() {
-        return console.log(`Player name: ${this.name}`);
+    displayName(player) {
+        return console.log(`${player}'s name: ${this.name}`);
     }
 
     setName(name) {
