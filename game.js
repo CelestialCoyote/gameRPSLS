@@ -18,6 +18,7 @@ class Game {
         this.playerOne;
         this.playerTwo;
         this.numberOfPlayers = 0;
+        this.numberOfRounds = 0;
     }
 
     displayWelcome() {
@@ -110,7 +111,7 @@ class Game {
             this.playerTwo.chooseGesture();
         }
         
-        log(chalk.yellow(`\nPlayer One's gesture was: ${this.playerOne.roundChoice}\n`));
+        log(chalk.yellow(`\nPlayer One's gesture was: ${this.playerOne.roundChoice}`));
         log(chalk.yellow(`Player Two's gesture was: ${this.playerTwo.roundChoice}\n`));
         this.checkRoundWinner(this.playerOne.roundChoice, this.playerTwo.roundChoice);
     }
@@ -192,6 +193,34 @@ class Game {
             log(chalk.cyan(`No winner this round. Both players chose `) + chalk.red(`${playerOneGesture}.\n`));
             this.playRound();
         }
+        this.numberOfRounds++;
+    }
+
+    checkForGameWinner() {
+        if(this.playerOne.score < 3 || this.playerTwo.score < 3) {
+            log(chalk.cyan(`\nAfter ${this.numberOfRounds} rounds, the current score is:\n`));
+            log(chalk.cyan(`Player One - ${this.playerOne.score} to Player Two - ${this.playerTwo.score}\n`));
+            log(chalk.cyan(`Next round, starts now.\n`));
+            this.playRound();
+        } else if(this.playerOne.score === 3) {
+            log(chalk.cyan(`Player One - `) + chalk.green(`${this.playerOne.name}`) + chalk.cyan(` is the winner!`));
+        } else if(this.playerTwo.score === 3) {
+            log(chalk.cyan(`Player Two - `) + chalk.green(`${this.playerTwo.name}`) + chalk.cyan(` is the winner!`));
+        }
+    }
+
+    restartGame() {
+        log(chalk.cyan(`Do you want to start another game?\n'Yes' or 'No'.`));
+        let restart = prompt(chalk.yellow('> ')).toLowerCase();
+
+        if(restart === 'yes') {
+            this.runGame();
+        } else if(restart === 'no') {
+            return;
+        } else {
+            log(chalk.cyan(`\nDid not understand response, please enter 'Yes' or 'No'.`));
+            this.restartGame();
+        }
     }
 
     
@@ -201,6 +230,7 @@ class Game {
         this.displayRules();
         this.createPlayers();
         this.playRound();
+        this.checkForGameWinner();
     }
 }
 
