@@ -15,3 +15,4 @@ let game = new Game();
 
 game.displayWelcome();
 game.displayRules();
+game.createPlayers();

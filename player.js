@@ -1,7 +1,11 @@
 'use strict';
 
 
+// NPM imports.
 const prompt = require('prompt-sync')();
+const chalk = require('chalk');
+
+const log = console.log;    // Short version of console.log call.
 
 
 class Player {
@@ -14,7 +18,7 @@ class Player {
     }
 
     displayName(player) {
-        return console.log(`${player}'s name: ${this.name}`);
+        return log(chalk.cyan(`${player}'s name: ${this.name}`));
     }
 
     setName(name) {
@@ -22,7 +26,7 @@ class Player {
     }
 
     displayScore() {
-        return console.log(`Player score: ${this.score}`);
+        return log(chalk.cyan(`Player score: ${this.score}`));
     }
 
     setScore(score) {
@@ -52,7 +56,7 @@ class Player {
                     isValid = true;
                     break;
                 default:
-                    console.log(`That is not a valid choice. Please try again.`);
+                    log(chalk.red(`That is not a valid choice. Please try again.`));
                     userChoice = prompt('> ');
             }
         }

@@ -9,7 +9,8 @@ const chalk = require('chalk');
 const Player = require('./player');
 const PlayerHuman = require('./playerHuman');
 const PlayerComputer = require('./playerComputer');
-const log = console.log;
+
+const log = console.log;    // Short version of console.log call.
 
 
 class Game {
@@ -52,8 +53,26 @@ class Game {
         log('');
     }
 
-    createPlayers(numberOfHumanPlayers) {
+    createPlayers() {
+        log(chalk.cyan(`How many human players in the game?\n1 or 2?\n`));
+        let response = prompt(chalk.yellow('> '));
 
+        if(response === '1') {
+            log(chalk.green(`\nOne human player vs. the computer.\n`));
+            log(chalk.cyan(`What is Player One's name?\n`));
+            response = prompt(chalk.cyan('> '));
+
+            let playerOne = new PlayerHuman(response);
+            let playerTwo = new PlayerComputer();
+
+            playerOne.displayName('Player One');
+            playerTwo.displayName('Player Two');
+        } else if(response === '2') {
+            log(chalk.green(`\nOne human player vs. another human player.\n`));
+        } else {
+            log(chalk.red(`\nThat is not a valid input.\nPlease enter '1' or '2'.\n`));
+            return this.createPlayers();
+        }
     }
 }
 
