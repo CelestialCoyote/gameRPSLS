@@ -11,8 +11,8 @@ const PlayerHuman = require('./playerHuman');
 const PlayerComputer = require('./playerComputer');
 
 
+// Create new Game object so game can be played.
 let game = new Game();
 
-game.displayWelcome();
-game.displayRules();
-game.createPlayers();
+// Start the game.
+game.runGame();

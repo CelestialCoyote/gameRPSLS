@@ -86,6 +86,20 @@ class Game {
             return this.createPlayers();
         }
     }
+
+    playRound() {
+
+    }
+
+    checkRoundWinner() {
+
+    }
+
+    runGame() {
+        this.displayWelcome();
+        this.displayRules();
+        this.createPlayers();
+    }
 }
 
 
