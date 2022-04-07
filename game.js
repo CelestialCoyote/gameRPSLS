@@ -66,7 +66,6 @@ class Game {
 
             this.playerOne.displayName('Player One');
             this.playerTwo.displayName('Player Two');
-            log(chalk.magenta(`\nnumberOfPlayers set to: ${this.numberOfPlayers}\n`));
             log('');
         } else if(response === '2') {
             log(chalk.green(`\nOne human player vs. another human player.\n`));
@@ -181,6 +180,8 @@ class Game {
     }
 
     displayRoundWinnerMessage(winner, playerOneGesture, playerTwoGesture, verb) {
+        this.numberOfRounds++;
+        
         if(winner === 'playerOne') {
             this.playerOne.score++;
             log(chalk.green(`Player One wins round.\n`));
@@ -193,19 +194,21 @@ class Game {
             log(chalk.cyan(`No winner this round. Both players chose `) + chalk.red(`${playerOneGesture}.\n`));
             this.playRound();
         }
-        this.numberOfRounds++;
+        this.checkForGameWinner();
     }
 
     checkForGameWinner() {
-        if(this.playerOne.score < 3 || this.playerTwo.score < 3) {
-            log(chalk.cyan(`\nAfter ${this.numberOfRounds} rounds, the current score is:\n`));
+        if(this.playerOne.score < 3 && this.playerTwo.score < 3) {
+            log(chalk.cyan(`\nAfter ${this.numberOfRounds} round(s), the current score is:`));
             log(chalk.cyan(`Player One - ${this.playerOne.score} to Player Two - ${this.playerTwo.score}\n`));
             log(chalk.cyan(`Next round, starts now.\n`));
             this.playRound();
         } else if(this.playerOne.score === 3) {
-            log(chalk.cyan(`Player One - `) + chalk.green(`${this.playerOne.name}`) + chalk.cyan(` is the winner!`));
+            log(chalk.cyan(`\nPlayer One - `) + chalk.green(`${this.playerOne.name}`) + chalk.cyan(` is the winner!\n`));
+            this.restartGame();
         } else if(this.playerTwo.score === 3) {
-            log(chalk.cyan(`Player Two - `) + chalk.green(`${this.playerTwo.name}`) + chalk.cyan(` is the winner!`));
+            log(chalk.cyan(`\nPlayer Two - `) + chalk.green(`${this.playerTwo.name}`) + chalk.cyan(` is the winner!\n`));
+            this.restartGame();
         }
     }
 
@@ -230,7 +233,7 @@ class Game {
         this.displayRules();
         this.createPlayers();
         this.playRound();
-        this.checkForGameWinner();
+        //this.checkForGameWinner();
     }
 }
 
