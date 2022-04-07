@@ -53,7 +53,7 @@ class Player {
                     break;
                 default:
                     console.log(`That is not a valid choice. Please try again.`);
-                    prompt('> ');
+                    userChoice = prompt('> ');
             }
         }
         this.roundChoice = userChoice;
