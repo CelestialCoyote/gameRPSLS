@@ -9,6 +9,7 @@ const chalk = require('chalk');
 const Player = require('./player');
 const PlayerHuman = require('./playerHuman');
 const PlayerComputer = require('./playerComputer');
+//const rpsls = require('./rpslsData');
 
 const log = console.log;    // Short version of console.log call.
 
@@ -231,6 +232,153 @@ class Game {
         this.displayRules();
         this.createPlayers();
         this.playRound();
+    }
+
+
+    // Attempting to refactor these functions, not working as expected.
+    // Not used.
+    checkRoundWinner_new(playerOneGesture, playerTwoGesture) {
+        const rpsls = [
+            {
+                playerOne: 'rock',
+                verb: 'crushes',
+                playerTwo: 'scissors',
+                winner: 'playerOne'
+            },
+            {
+                playerOne: 'scissors',
+                verb: 'cuts',
+                playerTwo: 'paper',
+                winner: 'playerOne'
+            },
+            {
+                playerOne: 'paper',
+                verb: 'covers',
+                playerTwo: 'rock',
+                winner: 'playerOne'
+            },
+            {
+                playerOne: 'rock',
+                verb: 'crushes',
+                playerTwo: 'lizard',
+                winner: 'playerOne'
+            },
+            {
+                playerOne: 'lizard',
+                verb: 'poisons',
+                playerTwo: 'spock',
+                winner: 'playerOne'
+            },
+            {
+                playerOne: 'spock',
+                verb: 'smashes',
+                playerTwo: 'scissors',
+                winner: 'playerOne'
+            },
+            {
+                playerOne: 'scissors',
+                verb: 'decapitates',
+                playerTwo: 'lizard',
+                winner: 'playerOne'
+            },
+            {
+                playerOne: 'lizard',
+                verb: 'eats',
+                playerTwo: 'paper',
+                winner: 'playerOne'
+            },
+            {
+                playerOne: 'paper',
+                verb: 'disproves',
+                playerTwo: 'spock',
+                winner: 'playerOne'
+            },
+            {
+                playerOne: 'spock',
+                verb: 'vaporizes',
+                playerTwo: 'rock',
+                winner: 'playerOne'
+            },
+            {
+                playerTwo: 'rock',
+                verb: 'crushes',
+                playerOne: 'scissors',
+                winner: 'playerTwo'
+            },
+            {
+                playerTwo: 'scissors',
+                verb: 'cuts',
+                playerOne: 'paper',
+                winner: 'playerTwo'
+            },
+            {
+                playerTwo: 'paper',
+                verb: 'covers',
+                playerOne: 'rock',
+                winner: 'playerTwo'
+            },
+            {
+                playerTwo: 'rock',
+                verb: 'crushes',
+                playerOne: 'lizard',
+                winner: 'playerTwo'
+            },
+            {
+                playerTwo: 'lizard',
+                verb: 'poisons',
+                playerOneMove: 'spock',
+                winner: 'playerTwo'
+            },
+            {
+                playerTwo: 'spock',
+                verb: 'smashes',
+                playerOne: 'scissors',
+                winner: 'playerTwo'
+            },
+            {
+                playerTwo: 'scissors',
+                verb: 'decapitates',
+                playerOne: 'lizard',
+                winner: 'playerTwo'
+            },
+            {
+                playerTwo: 'lizard',
+                verb: 'eats',
+                playerOne: 'paper',
+                winner: 'playerTwo'
+            },
+            {
+                playerTwo: 'paper',
+                verb: 'disproves',
+                playerOne: 'spock',
+                winner: 'playerTwo'
+            },
+            {
+                playerTwo: 'spock',
+                verb: 'vaporizes',
+                playerOne: 'rock',
+                winner: 'playerTwo'
+            }
+        ];
+
+        if(playerOneGesture === playerTwoGesture) {
+            this.displayRoundWinnerMessage('draw', playerOneGesture, playerTwoGesture, '');
+        }
+
+        let result = rpsls.filter(function (potentialMatch) {
+            if (potentialMatch.playerOne === playerOneGesture && potentialMatch.playerTwo === playerTwoGesture) {
+              return true;
+            } else {
+              return false;
+            }
+        });
+        
+        return result;
+    }
+
+    displayRoundWinnerMessage_new(playerOneGesture, playerTwoGesture) {
+        let result = this.checkRoundWinner(playerOneGesture, playerTwoGesture);
+        log(JSON.stringify(result[0]));
     }
 }
 
