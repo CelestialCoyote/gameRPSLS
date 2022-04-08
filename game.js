@@ -69,23 +69,21 @@ class Game {
             log('');
         } else if(response === '2') {
             log(chalk.green(`\nOne human player vs. another human player.\n`));
+            
             log(chalk.cyan(`What is Player One's name?\n`));
             response = prompt(chalk.cyan('> '));
-
             this.playerOne = new PlayerHuman(response);
-            log(`\n`);
+            log(``);
 
             log(chalk.cyan(`What is Player Two's name?\n`));
             response = prompt(chalk.cyan('> '));
-
             this.playerTwo = new PlayerHuman(response);
-            log(`\n`);
+            log(``);
+
+            this.numberOfPlayers = 2;
 
             this.playerOne.displayName('Player One');
             this.playerTwo.displayName('Player Two');
-            this.numberOfPlayers = 2;
-    
-            log(chalk.magenta(`\nnumberOfPlayers set to: ${this.numberOfPlayers}\n`));
             log('');
         } else {
             log(chalk.red(`\nThat is not a valid input.\nPlease enter '1' or '2'.\n`));
@@ -218,9 +216,10 @@ class Game {
 
         if(restart === 'yes') {
             this.numberOfRounds = 0;
+            this.numberOfPlayers = 0;
             this.runGame();
         } else if(restart === 'no') {
-            return;
+            return process.exit();
         } else {
             log(chalk.cyan(`\nDid not understand response, please enter 'Yes' or 'No'.`));
             return this.restartGame();
