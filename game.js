@@ -94,14 +94,14 @@ class Game {
     }
 
     playRound() {
-        log(chalk.cyan(`What is Player One's gesture?`));
+        log(chalk.cyan(`What is Player One's gesture?\n` + chalk.yellow(`1 - rock, 2 - paper, 3 - scissors, 4 - lizard, 5 - spock`)));
         let playerOneMove = prompt(chalk.yellow('>'));
 
         this.playerOne.chooseGesture(playerOneMove);
         log('');
 
         if(this.numberOfPlayers === 2) {
-            log(chalk.cyan(`What is Player Two's gesture?`));
+            log(chalk.cyan(`What is Player Two's gesture?\n` + chalk.yellow(`1 - rock, 2 - paper, 3 - scissors, 4 - lizard, 5 - spock`)));
             let playerTwoMove = prompt(chalk.yellow('>'));
 
             this.playerTwo.chooseGesture(playerTwoMove);
@@ -110,8 +110,8 @@ class Game {
             this.playerTwo.chooseGesture();
         }
         
-        log(chalk.yellow(`\nPlayer One's gesture was: ${this.playerOne.roundChoice}`));
-        log(chalk.yellow(`Player Two's gesture was: ${this.playerTwo.roundChoice}\n`));
+        log(chalk.yellow(`\nPlayer One's gesture was: ` + chalk.green(`${this.playerOne.roundChoice}`)));
+        log(chalk.yellow(`Player Two's gesture was: ` + chalk.green(`${this.playerTwo.roundChoice}\n`)));
         this.checkRoundWinner(this.playerOne.roundChoice, this.playerTwo.roundChoice);
     }
 
@@ -217,6 +217,7 @@ class Game {
         let restart = prompt(chalk.yellow('> ')).toLowerCase();
 
         if(restart === 'yes') {
+            this.numberOfRounds = 0;
             this.runGame();
         } else if(restart === 'no') {
             return;
@@ -225,8 +226,6 @@ class Game {
             return this.restartGame();
         }
     }
-
-    
 
     runGame() {
         this.displayWelcome();

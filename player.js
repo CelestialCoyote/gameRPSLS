@@ -18,7 +18,7 @@ class Player {
     }
 
     displayName(player) {
-        return log(chalk.cyan(`\n${player}'s name: ${this.name}`));
+        return log(chalk.cyan(`\n${player}'s name: ` + chalk.green(`${this.name}`)));
     }
 
     setName(name) {
@@ -35,32 +35,31 @@ class Player {
 
     chooseGesture(gestureChoice) {
         let isValid = false;
-        let userChoice = gestureChoice.toLowerCase();
         this.roundChoice = '';
 
         while(!isValid){
-            switch (userChoice) {
-                case 'rock':
+            switch (gestureChoice) {
+                case '1':
                     isValid = true;
                     break;
-                case 'paper':
+                case '2':
                     isValid = true;
                     break;
-                case 'scissors':
+                case '3':
                     isValid = true;
                     break;
-                case 'lizard':
+                case '4':
                     isValid = true;
                     break;
-                case 'spock':
+                case '5':
                     isValid = true;
                     break;
                 default:
                     log(chalk.red(`That is not a valid choice. Please try again.`));
-                    userChoice = prompt('> ');
+                    gestureChoice = prompt('> ');
             }
         }
-        this.roundChoice = userChoice;
+        this.roundChoice = this.gameGestures[gestureChoice - 1];
     }
 }
 
