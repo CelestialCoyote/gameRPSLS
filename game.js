@@ -111,7 +111,8 @@ class Game {
         
         log(chalk.yellow(`\nPlayer One's gesture was: ` + chalk.green(`${this.playerOne.roundChoice}`)));
         log(chalk.yellow(`Player Two's gesture was: ` + chalk.green(`${this.playerTwo.roundChoice}\n`)));
-        this.checkRoundWinner(this.playerOne.roundChoice, this.playerTwo.roundChoice);
+        //this.checkRoundWinner(this.playerOne.roundChoice, this.playerTwo.roundChoice);
+        this.displayRoundWinnerMessage_new(this.playerOne.roundChoice, this.playerTwo.roundChoice);
     }
 
     checkRoundWinner(playerOneGesture, playerTwoGesture) {
@@ -326,7 +327,7 @@ class Game {
             {
                 playerTwo: 'lizard',
                 verb: 'poisons',
-                playerOneMove: 'spock',
+                playerOne: 'spock',
                 winner: 'playerTwo'
             },
             {
@@ -362,7 +363,9 @@ class Game {
         ];
 
         if(playerOneGesture === playerTwoGesture) {
-            this.displayRoundWinnerMessage('draw', playerOneGesture, playerTwoGesture, '');
+            this.displayRoundWinnerMessage_new(
+                {playerOne: playerOneGesture, verb: '', playerTwo: playerTwoGesture, winner: 'draw'}
+                );
         }
 
         let result = rpsls.filter(function (potentialMatch) {
@@ -373,12 +376,17 @@ class Game {
             }
         });
         
-        return result;
+        if(result.length === 1) {
+            return result[0];
+        } else {
+            return log(`Error determining winner.`);
+        }
+        
     }
 
-    displayRoundWinnerMessage_new(playerOneGesture, playerTwoGesture) {
-        let result = this.checkRoundWinner(playerOneGesture, playerTwoGesture);
-        log(JSON.stringify(result[0]));
+    displayRoundWinnerMessage_new(result) {
+        result = this.checkRoundWinner(this.playerOneGesture, this.playerTwoGesture);
+        log(JSON.stringify(result));
     }
 }
 
