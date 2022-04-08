@@ -222,7 +222,7 @@ class Game {
             return;
         } else {
             log(chalk.cyan(`\nDid not understand response, please enter 'Yes' or 'No'.`));
-            this.restartGame();
+            return this.restartGame();
         }
     }
 
@@ -233,7 +233,6 @@ class Game {
         this.displayRules();
         this.createPlayers();
         this.playRound();
-        //this.checkForGameWinner();
     }
 }
 
